@@ -12,8 +12,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import com.waysnpaths.core.CoreApplication
+import com.waysnpaths.core.di.CoreComponent
 import com.waysnpaths.core.domain.model.Issue
+import com.waysnpaths.core.mvvm.MvvmEvent
 import com.waysnpaths.issuedetails.ui.IssueDetailsFragment
 import com.waysnpaths.issueslist.R
 import com.waysnpaths.issueslist.di.DaggerIssuesListComponent
@@ -36,10 +37,14 @@ class IssuesListFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        setUpInjection()
+    }
+
+    private fun setUpInjection() {
         DaggerIssuesListComponent
             .builder()
             .fragment(this)
-            .plus(CoreApplication.coreComponent)
+            .plus(CoreComponent.instance)
             .build()
             .inject(this)
     }
@@ -47,22 +52,25 @@ class IssuesListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.issues_list_fragment, container, false)
-            viewModel = ViewModelProviders.of(this, viewModelFactory).get(IssuesListViewModel::class.java)
-            viewModel.getModel().observe(this, Observer(::render))
+            getViewModel()
+            observeModel()
             if (savedInstanceState == null) {
                 viewModel.onInit()
             } else {
                 Timber.d("Orientation change. Data restored from a view model that persisted.")
             }
         } else {
-            viewModel.getModel().observe(this, Observer(::render))
+            observeModel()
         }
         return rootView
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setUpView()
+    private fun getViewModel() {
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(IssuesListViewModel::class.java)
+    }
+
+    private fun observeModel() {
+        viewModel.getModel().observe(this, Observer(::render))
     }
 
     private fun render(issuesListModel: IssuesListModel) {
@@ -77,22 +85,20 @@ class IssuesListFragment : Fragment() {
     private fun renderStatus(status: Status) {
         when (status) {
             Loading -> {
-                swipeRefresh.isRefreshing = true
+                startLoading()
             }
             Loaded -> {
                 stopLoading()
             }
             is Error -> {
                 stopLoading()
-                status.stringId.getContentIfNotHandled()?.let(::displayError)
+                displayError(status.stringId)
             }
         }
     }
 
-    private fun displayError(stringId: Int) {
-        Snackbar.make(swipeRefresh, stringId, Snackbar.LENGTH_LONG)
-            .setAction(R.string.retry) { viewModel.onRefresh() }
-            .show()
+    private fun startLoading() {
+        swipeRefresh.isRefreshing = true
     }
 
     private fun stopLoading() {
@@ -102,21 +108,25 @@ class IssuesListFragment : Fragment() {
         isLoading = false
     }
 
+    private fun displayError(stringId: MvvmEvent<Int>) {
+        stringId.getContentIfNotHandled()?.let {
+            Snackbar.make(swipeRefresh, it, Snackbar.LENGTH_LONG)
+                .setAction(R.string.retry) { viewModel.onRefresh() }
+                .show()
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpView()
+    }
+
     private fun setUpView() {
         issuesAdapter = IssuesAdapter { goToDetails(it) }
         rvIssues.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = issuesAdapter
-            addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                    super.onScrollStateChanged(recyclerView, newState)
-                    if (!recyclerView.canScrollVertically(1) && !isLoading) {
-                        isLoading = true
-                        progressBar.visibility = View.VISIBLE
-                        viewModel.onNextPage()
-                    }
-                }
-            })
+            addOnScrollListener(getOnScrollListener())
         }
 
         swipeRefresh.setOnRefreshListener {
@@ -131,6 +141,19 @@ class IssuesListFragment : Fragment() {
             ?.replace(R.id.container, IssueDetailsFragment.newInstance(issue))
             ?.addToBackStack(null)
             ?.commit()
+    }
+
+    private fun getOnScrollListener(): RecyclerView.OnScrollListener {
+        return object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerView.canScrollVertically(1) && !isLoading) {
+                    isLoading = true
+                    progressBar.visibility = View.VISIBLE
+                    viewModel.onNextPage()
+                }
+            }
+        }
     }
 
     companion object {

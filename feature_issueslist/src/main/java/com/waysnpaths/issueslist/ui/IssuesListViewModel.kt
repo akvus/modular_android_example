@@ -30,8 +30,8 @@ class IssuesListViewModel @Inject constructor(
     }
 
     private fun onError(throwable: Throwable) {
-        model.value = IssuesListModel(status = Error(MvvmEvent(R.string.could_not_load_issues)))
         Timber.e(throwable)
+        model.value = IssuesListModel(status = Error(MvvmEvent(R.string.could_not_load_issues)))
     }
 
     fun onRefresh() {
@@ -51,6 +51,6 @@ class IssuesListViewModel @Inject constructor(
 
     private fun addIssues(issues: List<Issue>) {
         Timber.d("Loaded ${issues.size} issues, page: $currentPage")
-        model.value = IssuesListModel(model.value?.issues ?: listOf<Issue>() + issues, Loaded)
+        model.value = IssuesListModel((model.value?.issues ?: listOf()) + issues, Loaded)
     }
 }

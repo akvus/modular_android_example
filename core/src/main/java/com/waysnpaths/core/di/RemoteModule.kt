@@ -1,6 +1,5 @@
 package com.waysnpaths.core.di
 
-import android.app.Application
 import com.waysnpaths.core.domain.repository.IssueRepository
 import com.waysnpaths.core.remote.RemoteClient
 import com.waysnpaths.core.remote.RemoteInterface
@@ -14,7 +13,7 @@ import dagger.Provides
 class RemoteModule {
 
     @Provides
-    fun remoteClient(application: Application) = RemoteClient
+    fun remoteClient() = RemoteClient
 
     @Provides
     fun remoteInterface(remoteClient: RemoteClient) = remoteClient.remoteInterface

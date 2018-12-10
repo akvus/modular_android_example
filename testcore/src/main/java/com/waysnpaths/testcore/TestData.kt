@@ -27,5 +27,4 @@ object TestData {
     val issues = listOf(
         issue, issue,     issue
     )
-    val page: Int = 3
 }

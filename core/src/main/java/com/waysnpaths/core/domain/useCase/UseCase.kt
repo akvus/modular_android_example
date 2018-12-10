@@ -17,6 +17,4 @@ abstract class UseCase<Params, Result>(
             .subscribeOn(subscribeOn)
             .observeOn(observeOn)
     }
-
-    class None : Any()
 }

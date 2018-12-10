@@ -10,8 +10,8 @@ import timber.log.Timber
 class CoreApplication : DaggerApplication() {
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        coreComponent = DaggerCoreComponent.builder().application(this).build()
-        return coreComponent
+        CoreComponent.instance = DaggerCoreComponent.builder().application(this).build()
+        return CoreComponent.instance
     }
 
     override fun onCreate() {
@@ -24,8 +24,4 @@ class CoreApplication : DaggerApplication() {
         Timber.plant(Timber.DebugTree())
     }
 
-    companion object {
-        lateinit var coreComponent: CoreComponent
-            private set
-    }
 }

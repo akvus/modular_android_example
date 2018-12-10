@@ -13,9 +13,7 @@ import dagger.android.AndroidInjector
 @Component(modules = [CoreModule::class, RemoteModule::class, UseCaseModule::class, AndroidInjectionModule::class])
 interface CoreComponent : AndroidInjector<CoreApplication> {
 
-    // todo do sth with these
     fun context(): Context
-
     fun getIssuesUseCase(): GetIssuesUseCase
 
     @Component.Builder
@@ -27,4 +25,8 @@ interface CoreComponent : AndroidInjector<CoreApplication> {
     }
 
     fun inject(application: Application)
+
+    companion object {
+        lateinit var instance: CoreComponent
+    }
 }

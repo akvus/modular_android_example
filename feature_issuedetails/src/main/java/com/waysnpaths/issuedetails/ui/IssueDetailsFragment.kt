@@ -16,6 +16,7 @@ import java.util.*
 
 
 class IssueDetailsFragment : Fragment() {
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.issue_details_fragment, container, false)
     }
@@ -32,12 +33,15 @@ class IssueDetailsFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun setUpView(issue: Issue) {
+        activity?.title = "#${issue.id} (${issue.state})"
+
         tvTitle.text = issue.title.capitalize()
-        tvBody.movementMethod = ScrollingMovementMethod()
-        tvBody.text = issue.body
+        tvBody.apply {
+            movementMethod = ScrollingMovementMethod()
+            text = issue.body
+        }
         tvInformation.text = tvInformation.context.getString(R.string.author, issue.user.login,
             SimpleDateFormat(CoreContract.dateFormat, Locale.ENGLISH).format(issue.createdAt))
-        activity?.title = "#${issue.id} (${issue.state})"
     }
 
     companion object {

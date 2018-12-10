@@ -12,17 +12,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         if (savedInstanceState == null) {
-            setUpView()
+            setFragment(IssuesListFragment.newInstance())
         } else {
             Timber.d("On orientation change not setting up view again.")
         }
     }
 
-    private fun setUpView() {
-        goTo(IssuesListFragment.newInstance())
-    }
-
-    private fun goTo(fragment: Fragment) {
+    private fun setFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.container, fragment)
             .commit()
