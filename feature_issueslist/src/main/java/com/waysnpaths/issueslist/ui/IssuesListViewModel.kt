@@ -46,12 +46,11 @@ class IssuesListViewModel @Inject constructor(
 
     fun onNextPage() {
         currentPage++
-        setLoadingState()
         retrieveIssues(currentPage, ::addIssues)
     }
 
     private fun addIssues(issues: List<Issue>) {
         Timber.d("Loaded ${issues.size} issues, page: $currentPage")
-        model.value = IssuesListModel(model.value!!.issues + issues, Loaded)
+        model.value = IssuesListModel(model.value?.issues ?: listOf<Issue>() + issues, Loaded)
     }
 }
