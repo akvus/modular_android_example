@@ -1,0 +1,4 @@
+<resources>
+    <string name="could_not_load_issues">Could not load issues</string>
+    <string name="retry">Retry</string>
+</resources>

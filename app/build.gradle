@@ -1,0 +1,42 @@
+apply plugin: 'com.android.application'
+    apply plugin: 'kotlin-android'
+    apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.waysnpaths.android_exercise"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "androidx.recyclerview:recyclerview:$recycler_version"
+
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+
+    implementation project(':core')
+    implementation project(':feature_issueslist')
+
+    testImplementation "junit:junit:$junit_version"
+    testImplementation project(':testcore')
+
+    androidTestImplementation 'androidx.test:runner:1.1.1-alpha01'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1-alpha01'
+}

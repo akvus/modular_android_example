@@ -1,0 +1,48 @@
+[
+  {
+    "url": "https://api.github.com/repos/tensorflow/tensorflow/issues/24209",
+    "repository_url": "https://api.github.com/repos/tensorflow/tensorflow",
+    "labels_url": "https://api.github.com/repos/tensorflow/tensorflow/issues/24209/labels{/name}",
+    "comments_url": "https://api.github.com/repos/tensorflow/tensorflow/issues/24209/comments",
+    "events_url": "https://api.github.com/repos/tensorflow/tensorflow/issues/24209/events",
+    "html_url": "https://github.com/tensorflow/tensorflow/issues/24209",
+    "id": 388429572,
+    "node_id": "MDU6SXNzdWUzODg0Mjk1NzI=",
+    "number": 24209,
+    "title": "Tensorflow-GPU ImportError: DLL load failed",
+    "user": {
+      "login": "Cavan09",
+      "id": 11929685,
+      "node_id": "MDQ6VXNlcjExOTI5Njg1",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/11929685?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/Cavan09",
+      "html_url": "https://github.com/Cavan09",
+      "followers_url": "https://api.github.com/users/Cavan09/followers",
+      "following_url": "https://api.github.com/users/Cavan09/following{/other_user}",
+      "gists_url": "https://api.github.com/users/Cavan09/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/Cavan09/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/Cavan09/subscriptions",
+      "organizations_url": "https://api.github.com/users/Cavan09/orgs",
+      "repos_url": "https://api.github.com/users/Cavan09/repos",
+      "events_url": "https://api.github.com/users/Cavan09/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/Cavan09/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2018-12-06T22:43:06Z",
+    "updated_at": "2018-12-06T22:43:06Z",
+    "closed_at": null,
+    "author_association": "NONE",
+    "body": "### System information\r\n- *OS:* Windows 10\r\n- **TensorFlow version**: Tensorflow v 1.12\r\n- **Python version**: 3.6.0\r\n- **CUDA/cuDNN version**: CUDA 10.0, cuDNN 7.4.1.5\r\n- **GPU model and memory**: 2080 ti\r\n\r\nI'm trying to get Tensorflow set-up on my machine. I've followed about 10 different tutorials but always come back to this same issue. I see that a bunch of other people have the same issue and just downgraded their CUDA to 9.0 due to Tensorflow not supporting 10.0. My problem is that the 2080 ti is only supported with CUDA 10.0\r\n\r\nIs anyone else using one of the RTX cards and have they had any of the same issues? My log is below.\r\n\r\n### Source code / logs\r\nTraceback (most recent call last):\r\n  File \"<stdin>\", line 1, in <module>\r\n  File \"C:\\Users\\cmacphail\\AppData\\Local\\Programs\\Python\\Python36\\lib\\site-packages\\tensorflow\\__init__.py\", line 24, in <module>\r\n    from tensorflow.python import pywrap_tensorflow  # pylint: disable=unused-import\r\n  File \"C:\\Users\\cmacphail\\AppData\\Local\\Programs\\Python\\Python36\\lib\\site-packages\\tensorflow\\python\\__init__.py\", line 49, in <module>\r\n    from tensorflow.python import pywrap_tensorflow\r\n  File \"C:\\Users\\cmacphail\\AppData\\Local\\Programs\\Python\\Python36\\lib\\site-packages\\tensorflow\\python\\pywrap_tensorflow.py\", line 74, in <module>\r\n    raise ImportError(msg)\r\nImportError: Traceback (most recent call last):\r\n  File \"C:\\Users\\cmacphail\\AppData\\Local\\Programs\\Python\\Python36\\lib\\site-packages\\tensorflow\\python\\pywrap_tensorflow.py\", line 58, in <module>\r\n    from tensorflow.python.pywrap_tensorflow_internal import *\r\n  File \"C:\\Users\\cmacphail\\AppData\\Local\\Programs\\Python\\Python36\\lib\\site-packages\\tensorflow\\python\\pywrap_tensorflow_internal.py\", line 28, in <module>\r\n    _pywrap_tensorflow_internal = swig_import_helper()\r\n  File \"C:\\Users\\cmacphail\\AppData\\Local\\Programs\\Python\\Python36\\lib\\site-packages\\tensorflow\\python\\pywrap_tensorflow_internal.py\", line 24, in swig_import_helper\r\n    _mod = imp.load_module('_pywrap_tensorflow_internal', fp, pathname, description)\r\n  File \"C:\\Users\\cmacphail\\AppData\\Local\\Programs\\Python\\Python36\\lib\\imp.py\", line 242, in load_module\r\n    return load_dynamic(name, filename, file)\r\n  File \"C:\\Users\\cmacphail\\AppData\\Local\\Programs\\Python\\Python36\\lib\\imp.py\", line 342, in load_dynamic\r\n    return _load(spec)\r\nImportError: DLL load failed: The specified module could not be found.\r\n"
+  }
+]

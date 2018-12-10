@@ -1,0 +1,31 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 21
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    api "junit:junit:$junit_version"
+    api "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_version"
+
+    api "android.arch.core:core-testing:$arch_core_testing_version"
+
+    api 'com.squareup.okhttp3:mockwebserver:3.12.0'
+
+    implementation project(path: ':core')
+}

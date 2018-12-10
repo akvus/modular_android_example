@@ -1,0 +1,1 @@
+include ':app', ':feature_issueslist', ':feature_issuedetails', ':core', ':testcore'

@@ -1,0 +1,4 @@
+<resources>
+    <string name="issue_id">Issue id: %s</string>
+    <string name="author">By %s on %s</string>
+</resources>
