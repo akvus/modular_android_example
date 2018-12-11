@@ -7,3 +7,7 @@ Before building the project add client_id and client_secret in CoreContract.kt t
 ## Tests
 
 Run ./gradlew test to test all modules at once.
+
+## Apk
+
+Apk can be found in /apk directory.
