@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class UseCaseModule {
+class IssueUseCasesModule {
 
     @Provides
     fun getIssuesUseCase(issueRepository: IssueRepository) = GetIssuesUseCase(issueRepository)

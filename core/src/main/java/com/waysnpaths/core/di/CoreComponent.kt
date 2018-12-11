@@ -10,7 +10,7 @@ import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
 
 @CoreScope
-@Component(modules = [CoreModule::class, RemoteModule::class, UseCaseModule::class, AndroidInjectionModule::class])
+@Component(modules = [CoreModule::class, RemoteModule::class, IssueUseCasesModule::class, AndroidInjectionModule::class])
 interface CoreComponent : AndroidInjector<CoreApplication> {
 
     fun context(): Context

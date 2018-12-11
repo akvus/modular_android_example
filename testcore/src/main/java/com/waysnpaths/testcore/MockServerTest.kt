@@ -13,7 +13,6 @@ open class MockServerTest : BaseTest() {
     fun setUp() {
         mockServer = MockWebServer()
         mockServer.start()
-
     }
 
     @After
