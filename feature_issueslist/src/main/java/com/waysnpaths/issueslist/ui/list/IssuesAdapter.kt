@@ -1,4 +1,4 @@
-package com.waysnpaths.issueslist.ui
+package com.waysnpaths.issueslist.ui.list
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -18,7 +18,13 @@ class IssuesAdapter(
 ) : ListAdapter<Issue, IssuesAdapter.Holder>(ItemCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        return Holder(LayoutInflater.from(parent.context).inflate(R.layout.issues_rv_item, parent, false))
+        return Holder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.issues_rv_item,
+                parent,
+                false
+            )
+        )
     }
 
     @SuppressLint("SetTextI18n")

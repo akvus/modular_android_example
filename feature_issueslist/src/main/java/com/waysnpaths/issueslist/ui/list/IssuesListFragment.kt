@@ -1,4 +1,4 @@
-package com.waysnpaths.issueslist.ui
+package com.waysnpaths.issueslist.ui.list
 
 import android.content.Context
 import android.os.Bundle
@@ -17,7 +17,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.waysnpaths.core.di.CoreComponent
 import com.waysnpaths.core.domain.model.Issue
 import com.waysnpaths.core.mvvm.MvvmEvent
-import com.waysnpaths.issuedetails.ui.IssueDetailsFragment
+import com.waysnpaths.issueslist.ui.details.IssueDetailsFragment
 import com.waysnpaths.issueslist.R
 import com.waysnpaths.issueslist.di.DaggerIssuesListComponent
 import kotlinx.android.synthetic.main.issues_list_fragment.*

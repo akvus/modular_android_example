@@ -10,7 +10,6 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core" />
-            <option value="$PROJECT_DIR$/feature_issuedetails" />
             <option value="$PROJECT_DIR$/feature_issueslist" />
             <option value="$PROJECT_DIR$/testcore" />
           </set>

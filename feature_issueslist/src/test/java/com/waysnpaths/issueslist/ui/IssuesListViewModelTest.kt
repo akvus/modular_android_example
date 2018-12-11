@@ -3,6 +3,11 @@ package com.waysnpaths.issueslist.ui
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
 import com.waysnpaths.core.domain.useCase.issue.GetIssuesUseCase
+import com.waysnpaths.issueslist.ui.list.Error
+import com.waysnpaths.issueslist.ui.list.IssuesListModel
+import com.waysnpaths.issueslist.ui.list.IssuesListViewModel
+import com.waysnpaths.issueslist.ui.list.Loaded
+import com.waysnpaths.issueslist.ui.list.Loading
 import com.waysnpaths.testcore.BaseTest
 import com.waysnpaths.testcore.TestData
 import com.waysnpaths.testcore.TestObserver

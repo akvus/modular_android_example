@@ -1,1 +1,1 @@
-include ':app', ':feature_issueslist', ':feature_issuedetails', ':core', ':testcore'
+include ':app', ':feature_issueslist', ':core', ':testcore'

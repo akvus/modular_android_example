@@ -2,7 +2,7 @@ package com.waysnpaths.issueslist.di
 
 import androidx.fragment.app.Fragment
 import com.waysnpaths.core.di.CoreComponent
-import com.waysnpaths.issueslist.ui.IssuesListFragment
+import com.waysnpaths.issueslist.ui.list.IssuesListFragment
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector

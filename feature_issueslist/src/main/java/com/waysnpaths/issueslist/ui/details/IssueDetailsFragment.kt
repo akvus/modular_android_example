@@ -1,4 +1,4 @@
-package com.waysnpaths.issuedetails.ui
+package com.waysnpaths.issueslist.ui.details
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.waysnpaths.core.CoreContract
 import com.waysnpaths.core.domain.model.Issue
-import com.waysnpaths.issuedetails.R
+import com.waysnpaths.issueslist.R
 import kotlinx.android.synthetic.main.issue_details_fragment.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -40,7 +40,7 @@ class IssueDetailsFragment : Fragment() {
             movementMethod = ScrollingMovementMethod()
             text = issue.body
         }
-        tvInformation.text = tvInformation.context.getString(R.string.author, issue.user.login,
+        tvInformation.text = tvInformation.context.getString(R.string.posted_by_on, issue.user.login,
             SimpleDateFormat(CoreContract.dateFormat, Locale.ENGLISH).format(issue.createdAt))
     }
 

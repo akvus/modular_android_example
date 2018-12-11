@@ -1,4 +1,4 @@
-package com.waysnpaths.issueslist.ui
+package com.waysnpaths.issueslist.ui.list
 
 import com.waysnpaths.core.domain.model.Issue
 import com.waysnpaths.core.mvvm.MvvmEvent

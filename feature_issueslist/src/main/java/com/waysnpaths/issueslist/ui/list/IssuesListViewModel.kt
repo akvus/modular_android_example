@@ -1,4 +1,4 @@
-package com.waysnpaths.issueslist.ui
+package com.waysnpaths.issueslist.ui.list
 
 import com.waysnpaths.core.domain.model.Issue
 import com.waysnpaths.core.domain.useCase.issue.GetIssuesUseCase
@@ -15,7 +15,8 @@ class IssuesListViewModel @Inject constructor(
     private var currentPage = 1
 
     fun onInit() {
-        model.value = IssuesListModel(status = Loading)
+        model.value =
+                IssuesListModel(status = Loading)
         retrieveIssues(currentPage, ::replaceIssues)
     }
 
@@ -26,12 +27,15 @@ class IssuesListViewModel @Inject constructor(
 
     private fun replaceIssues(issues: List<Issue>) {
         Timber.d("Loaded ${issues.size} issues, page: $currentPage")
-        model.value = IssuesListModel(issues, Loaded)
+        model.value =
+                IssuesListModel(issues, Loaded)
     }
 
     private fun onError(throwable: Throwable) {
         Timber.e(throwable)
-        model.value = IssuesListModel(status = Error(MvvmEvent(R.string.could_not_load_issues)))
+        model.value = IssuesListModel(
+            status = Error(MvvmEvent(R.string.could_not_load_issues))
+        )
     }
 
     fun onRefresh() {
@@ -41,7 +45,8 @@ class IssuesListViewModel @Inject constructor(
     }
 
     private fun setLoadingState() {
-        model.value = model.value?.copy(status = Loading) ?: IssuesListModel(status = Loading)
+        model.value = model.value?.copy(status = Loading) ?:
+                IssuesListModel(status = Loading)
     }
 
     fun onNextPage() {
@@ -51,6 +56,9 @@ class IssuesListViewModel @Inject constructor(
 
     private fun addIssues(issues: List<Issue>) {
         Timber.d("Loaded ${issues.size} issues, page: $currentPage")
-        model.value = IssuesListModel((model.value?.issues ?: listOf()) + issues, Loaded)
+        model.value = IssuesListModel(
+            (model.value?.issues ?: listOf()) + issues,
+            Loaded
+        )
     }
 }

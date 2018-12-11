@@ -3,7 +3,7 @@ package com.waysnpaths.exercise
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.waysnpaths.issueslist.ui.IssuesListFragment
+import com.waysnpaths.issueslist.ui.list.IssuesListFragment
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
