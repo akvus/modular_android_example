@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -26,22 +25,23 @@ class IssuesAdapter(
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val item = getItem(position)
         holder.apply {
-            cardView.setOnClickListener {
+            view.setOnClickListener {
                 onClick.invoke(getItem(holder.adapterPosition))
             }
-            tvTitle.text = "#${item.id} - ${item.title.capitalize()}"
+            tvTitle.text = item.title.capitalize()
             tvState.text = item.state
-            tvBody.text = item.body.substring(0, if (item.body.length < 200) item.body.length else 200).trim() + "..."
+            val maxBodyLength = 40
+            val shortBody = item.body.substring(0, if (item.body.length < maxBodyLength) item.body.length else maxBodyLength).trim() + "..."
+            tvBody.text = "#${item.id} - $shortBody"
             ivStateIcon.setImageDrawable(ContextCompat.getDrawable(ivStateIcon.context, if (item.state == "closed") {
-                R.drawable.ic_done_black_24dp
+                R.drawable.ic_done_24dp
             } else {
-                R.drawable.ic_error_outline_black_24dp
+                R.drawable.ic_error_outline_24dp
             }))
         }
     }
 
-    class Holder(view: View) : RecyclerView.ViewHolder(view) {
-        val cardView: CardView = view.findViewById(R.id.cardView)
+    class Holder(val view: View) : RecyclerView.ViewHolder(view) {
         val tvTitle: TextView = view.findViewById(R.id.tvTitle)
         val tvState: TextView = view.findViewById(R.id.tvState)
         val tvBody: TextView = view.findViewById(R.id.tvBody)

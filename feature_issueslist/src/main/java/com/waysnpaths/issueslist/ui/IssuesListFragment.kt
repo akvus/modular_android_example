@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -21,6 +23,8 @@ import com.waysnpaths.issueslist.di.DaggerIssuesListComponent
 import kotlinx.android.synthetic.main.issues_list_fragment.*
 import timber.log.Timber
 import javax.inject.Inject
+
+
 
 class IssuesListFragment : Fragment() {
 
@@ -127,6 +131,11 @@ class IssuesListFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = issuesAdapter
             addOnScrollListener(getOnScrollListener())
+            addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL).apply {
+                ContextCompat.getDrawable(context, R.drawable.gray_rectangle)?.let {
+                    setDrawable(it)
+                }
+            })
         }
 
         swipeRefresh.setOnRefreshListener {
