@@ -15,8 +15,7 @@ class IssuesListViewModel @Inject constructor(
     private var currentPage = 1
 
     fun onInit() {
-        model.value =
-                IssuesListModel(status = Loading)
+        model.value = IssuesListModel(status = Loading)
         retrieveIssues(currentPage, ::replaceIssues)
     }
 
@@ -34,7 +33,8 @@ class IssuesListViewModel @Inject constructor(
     private fun onError(throwable: Throwable) {
         Timber.e(throwable)
         model.value = IssuesListModel(
-            status = Error(MvvmEvent(R.string.could_not_load_issues))
+            model.value?.issues ?: listOf(),
+            Error(MvvmEvent(R.string.could_not_load_issues))
         )
     }
 
@@ -45,8 +45,7 @@ class IssuesListViewModel @Inject constructor(
     }
 
     private fun setLoadingState() {
-        model.value = model.value?.copy(status = Loading) ?:
-                IssuesListModel(status = Loading)
+        model.value = model.value?.copy(status = Loading) ?: IssuesListModel(status = Loading)
     }
 
     fun onNextPage() {
